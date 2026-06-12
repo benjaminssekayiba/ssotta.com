@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment (secrets)
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+dev-server.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Remotion / tooling cache
+.remotion/
+
+# Archives (keep source assets, not export bundles)
+attached_assets/*.tar*
+attached_assets/*.zip
