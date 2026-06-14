@@ -1,0 +1,49 @@
+Latest Ssotta review pass
+
+Run:
+  npm run dev
+
+Open:
+  http://localhost:3001
+
+What changed:
+  - Better font pairing: Plus Jakarta Sans + IBM Plex Mono.
+  - Showroom now has real request flows for bikes, spare parts, and repairs.
+  - Each request creates a booking ID, saves it in the browser, and opens WhatsApp with the request details.
+  - Recent requests are shown on the Showroom page for the same device.
+  - Spare Parts page now uses photo-based inventory cards.
+  - Spare part cards use six different web-sourced images, optimized into local assets for reliable loading.
+  - Spare Parts page now includes a fuller bicycle-parts catalogue: brakes, drivetrain, wheels, tyres, steering, seating, pedals, cables, cargo parts, safety items, service spares, and tools.
+  - Home CTA question updated to: Egaali Yo Namu? Okakasa?
+  - Home page now includes quick Bikes, Rentals, and Showroom sections so customers can act without leaving the homepage.
+  - Hero slideshow now includes kids riding bicycles, with subtle Wikimedia Commons attribution links on the slides.
+  - Replaced weak shop wording with more professional bicycle-specialist language.
+  - Rental bookings are now first-class requests with booking IDs and WhatsApp handoff.
+  - Rentals page cards now link directly into the rental booking form.
+  - Home quick-action cards were tightened for mobile, tablet, and desktop responsiveness.
+  - Added a homepage explainer video panel with an animated fallback.
+  - Added Remotion source and scripts for rendering the explainer video.
+  - Rendered public/ssotta-explainer.mp4 and fitted it into the homepage video panel.
+  - Updated typography to Sora + IBM Plex Mono.
+  - Replaced the cargo-tricycle-style visual with the rider-carrying-cement image so the site only shows bicycle types Ssotta actually offers.
+  - Replaced the generic kids-riding slideshow images with the two supplied Uganda kids-riding images.
+  - Kept the assembled kids-bikes product image in place.
+  - Removed the unnecessary four-card "Bicycle Sales / Spare Parts / Repairs / Rentals" home section.
+  - Re-rendered public/ssotta-explainer.mp4 with the supplied kids-riding images.
+  - Bike, spare part, and repair CTAs link into the correct booking sections.
+
+Review these pages:
+  - /
+  - /parts
+  - /repairs
+  - /bikes
+  - /showroom#booking
+
+Verified:
+  - npm run build passed.
+  - npx tsc -p tsconfig.json --noEmit passed.
+  - Latest pass also verified with a no-write Vite build because the shell runner was blocked from writing to the Desktop dist folder.
+  - Remotion render completed for public/ssotta-explainer.mp4.
+
+Known next-level improvement:
+  - Add a real backend/admin dashboard if you want bookings stored centrally instead of only in browser localStorage + WhatsApp.
