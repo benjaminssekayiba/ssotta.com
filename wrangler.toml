@@ -1,5 +1,0 @@
-# Cloudflare Pages (Git-connected deploy uses the dashboard build settings below).
-# Optional: use `npx wrangler pages deploy dist` for manual uploads.
-name = "ssotta-website"
-compatibility_date = "2024-01-01"
-pages_build_output_dir = "dist"
