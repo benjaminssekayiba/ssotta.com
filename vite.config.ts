@@ -5,6 +5,8 @@ import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import { writeFileSync } from "fs";
 import path from "path";
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 const SITEMAP_ROUTES = ["/", "/bikes", "/parts", "/rentals", "/repairs", "/showroom"];
 
 function launchSeoPlugin(siteUrl: string): Plugin {
@@ -49,18 +51,13 @@ export default defineConfig(({ mode }) => {
 
   return {
     base: "/",
-    plugins: [
-      react(),
-      tailwindcss(),
-      ViteImageOptimizer({
-        png: { quality: 78 },
-        jpg: { quality: 82 },
-        jpeg: { quality: 82 },
-        webp: { quality: 82 },
-        svg: false,
-      }),
-      launchSeoPlugin(siteUrl),
-    ],
+    plugins: [react(), tailwindcss(), ViteImageOptimizer({
+      png: { quality: 78 },
+      jpg: { quality: 82 },
+      jpeg: { quality: 82 },
+      webp: { quality: 82 },
+      svg: false,
+    }), launchSeoPlugin(siteUrl), cloudflare()],
     resolve: {
       alias: {
         "@": path.resolve(import.meta.dirname, "src"),
