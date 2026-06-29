@@ -22,6 +22,24 @@ export default function Navbar() {
     setIsMobileMenuOpen(false);
   }, [location]);
 
+  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    const check = () => {
+      const now = new Date();
+      const eatTime = new Date(now.toLocaleString("en-US", { timeZone: "Africa/Kampala" }));
+      const day = eatTime.getDay();
+      const hour = eatTime.getHours();
+      if (day === 0) {
+        setIsOpen(hour >= 10 && hour < 16);
+      } else {
+        setIsOpen(hour >= 8 && hour < 18);
+      }
+    };
+    check();
+    const interval = setInterval(check, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/bikes", label: "Bikes" },
@@ -74,7 +92,18 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center">
+          <div className="flex items-center gap-2 mr-6 text-xs font-mono font-black uppercase">
+            <span className="relative flex h-2 w-2">
+              {isOpen && (
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              )}
+              <span className={`relative inline-flex rounded-full h-2 w-2 ${isOpen ? "bg-emerald-500" : "bg-red-500"}`}></span>
+            </span>
+            <span className={isTransparent ? "text-white/80" : "text-foreground/80"}>
+              {isOpen ? "Shop Open" : "Shop Closed"}
+            </span>
+          </div>
           <Button
             asChild
             className={`uppercase font-bold tracking-normal rounded-md border transition-all active:scale-95 ${
@@ -125,6 +154,17 @@ export default function Navbar() {
                   Book or Visit
                 </Link>
               </Button>
+              <div className="flex items-center justify-center gap-2 py-2">
+                <span className="relative flex h-2 w-2">
+                  {isOpen && (
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  )}
+                  <span className={`relative inline-flex rounded-full h-2 w-2 ${isOpen ? "bg-emerald-500" : "bg-red-500"}`}></span>
+                </span>
+                <span className="font-mono text-xs font-bold uppercase text-background/60">
+                  {isOpen ? "Shop is Open Now" : "Shop is Closed Now"}
+                </span>
+              </div>
               <a
                 href="tel:+256757432917"
                 className="font-mono text-primary font-bold text-center text-sm"

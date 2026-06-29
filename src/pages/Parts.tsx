@@ -272,7 +272,7 @@ export default function Parts() {
           transition={{ duration: 1.4 }}
           className="absolute inset-0 z-0"
         >
-          <img src={spareParts} alt="Spare parts display" className="h-full w-full object-cover grayscale mix-blend-luminosity" />
+          <img src="/hd-images/img-4.png" alt="Spare parts display" className="h-full w-full object-cover grayscale mix-blend-luminosity" />
         </motion.div>
         <div className="relative z-10 mx-auto max-w-screen-xl">
           <motion.p
