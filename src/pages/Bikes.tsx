@@ -9,7 +9,7 @@ import mountainBike from "@/assets/mountain-bike.png";
 import cityCommuter from "@/assets/city-commuter.png";
 import roadCycling from "@/assets/road-cycling.png";
 import heroImg from "@/assets/hero-dirt-road.png";
-import cementCarrierImg from "@/assets/cargo-rental.png";
+import cementCarrierImg from "@/assets/ChatGPT_Image_May_25,_2026,_01_28_35_PM_1780641993032.png";
 
 const bikes = [
   {
