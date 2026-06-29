@@ -385,7 +385,7 @@ export default function Showroom() {
     <div className="min-h-screen bg-background pt-20" data-testid="page-showroom">
       <section className="relative h-[60vh] min-h-[380px] overflow-hidden border-b-8 border-foreground">
         <motion.img
-          src="/hd-images/img-3.png"
+          src="/hd-images/img-2.png"
           alt="Ssotta showroom"
           initial={{ scale: 1.06 }}
           animate={{ scale: 1 }}
@@ -1024,7 +1024,7 @@ export default function Showroom() {
             transition={{ delay: 0.15, duration: 0.7 }}
           >
             <div className="overflow-hidden rounded-lg border border-foreground/15 shadow-xl">
-              <img src="/hd-images/img-2.png" alt="Ssotta showroom interior" className="h-[420px] w-full object-cover" />
+              <img src="/hd-images/img-3.png" alt="Ssotta showroom interior" className="h-[420px] w-full object-cover" />
             </div>
             <div className="mt-4 grid grid-cols-3 gap-3">
               {[
