@@ -45,7 +45,7 @@ Sitemap: ${normalized}/sitemap.xml
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, import.meta.dirname, "");
-  const siteUrl = env.VITE_SITE_URL ?? "";
+  const siteUrl = env.VITE_SITE_URL || "https://ssotta.com";
 
   return {
     base: "/",

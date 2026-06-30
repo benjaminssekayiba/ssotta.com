@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Bike, CalendarCheck, PackageCheck, Phone, ShieldCheck, Store, Wrench, ArrowRight, PlayCircle, Volume2 } from "lucide-react";
 import ssottaWordmark from "@/assets/brand/ssotta-wordmark.png";
+import { TiltCard } from "@/components/ui/tilt-card";
 
 /* Authentic Images from Chat */
 const kidOnBikeImg = "/hd-images/img-1.png";
@@ -231,15 +232,29 @@ function FAQSection() {
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                   className="w-full p-5 flex items-center justify-between text-left font-black uppercase text-sm md:text-base border-b-2 border-foreground"
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${i}`}
                 >
                   <span>{faq.q}</span>
                   <span className="font-mono text-xl">{isOpen ? "−" : "+"}</span>
                 </button>
-                {isOpen && (
-                  <div className="p-5 font-sans text-xs md:text-sm leading-relaxed text-muted-foreground bg-muted">
-                    {faq.a}
-                  </div>
-                )}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={`faq-answer-${i}`}
+                      role="region"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="p-5 font-sans text-xs md:text-sm leading-relaxed text-muted-foreground bg-muted border-t border-foreground/10">
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             );
           })}
@@ -486,9 +501,9 @@ export default function Home() {
             <img src={ssottaWordmark} alt="SSOTTA" className="mb-4 h-auto w-[min(75vw,60rem)] max-w-full object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.65)]" />
           </motion.div>
           <motion.div initial={{ clipPath: "inset(0 0 100% 0)" }} animate={{ clipPath: "inset(0 0 0% 0)" }} transition={{ duration: 0.95, delay: 0.25 }}>
-            <h2 className="mb-6 text-[clamp(1.6rem,6vw,5rem)] font-black uppercase tracking-normal leading-[0.88] text-primary">
+            <h1 className="mb-6 text-[clamp(1.6rem,6vw,5rem)] font-black uppercase tracking-normal leading-[0.88] text-primary">
               Egaali Ennamu
-            </h2>
+            </h1>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.05, duration: 0.5 }} className="flex flex-col sm:flex-row gap-4">
             <Button asChild size="lg" className="h-14 px-10 text-base font-black uppercase border-0 shadow-[5px_5px_0px_0px_#000] hover:shadow-[2px_2px_0px_0px_#000] hover:translate-x-1 hover:translate-y-1 transition-all rounded-md">
@@ -512,7 +527,7 @@ export default function Home() {
       {/* 2. ABOUT & STATS SECTION (MOVED UP) */}
       <section className="relative overflow-hidden border-b-4 border-foreground bg-foreground px-5 py-16 text-background md:px-12 md:py-24" data-testid="section-about">
         <div className="absolute inset-0 z-0">
-          <img src={hangingBikesImg} alt="Ssotta shop" className="h-full w-full object-cover opacity-10" />
+          <img src={hangingBikesImg} alt="Ssotta shop" className="h-full w-full object-cover opacity-10" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-b from-foreground via-foreground/90 to-foreground/80" />
         </div>
         
@@ -565,11 +580,12 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-6 bg-card border-4 border-foreground rounded-lg shadow-[5px_5px_0px_0px_#000]"
               >
-                <div className="font-mono text-3xl font-black text-primary mb-3">{item.step}</div>
-                <h4 className="text-lg font-black uppercase text-foreground mb-2">{item.title}</h4>
-                <p className="text-sm font-medium text-muted-foreground leading-relaxed">{item.desc}</p>
+                <TiltCard className="p-6 bg-card border-4 border-foreground rounded-lg shadow-[5px_5px_0px_0px_#000] h-full">
+                  <div className="font-mono text-3xl font-black text-primary mb-3">{item.step}</div>
+                  <h4 className="text-lg font-black uppercase text-foreground mb-2">{item.title}</h4>
+                  <p className="text-sm font-medium text-muted-foreground leading-relaxed">{item.desc}</p>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
@@ -592,6 +608,7 @@ export default function Home() {
                   src={managerImg}
                   alt="Ssotta Shop Manager"
                   className="w-full h-auto object-cover object-center max-h-[550px]"
+                  loading="lazy"
                 />
               </div>
               <p className="mt-3 font-mono text-[10px] font-bold uppercase tracking-wider text-muted-foreground text-center">
@@ -675,7 +692,7 @@ export default function Home() {
                 className="group relative flex h-full flex-col overflow-hidden rounded-xl border-4 border-foreground bg-white shadow-[6px_6px_0px_0px_#000] transition-transform hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_#000]"
               >
                 <div className="relative h-48 overflow-hidden border-b-4 border-foreground sm:h-56 lg:h-52">
-                  <img src={section.img} alt={`${section.eyebrow} at Ssotta`} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src={section.img} alt={`${section.eyebrow} at Ssotta`} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   
                   {/* Context Badge */}
@@ -724,19 +741,20 @@ export default function Home() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group relative overflow-hidden rounded-lg border-4 border-foreground bg-foreground shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)] transition-transform hover:-translate-y-1"
               >
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <img src={item.img} alt={item.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-                  <div className="absolute bottom-5 left-5 right-5">
-                    <p className="mb-1 font-mono text-[10px] font-bold uppercase tracking-wider text-primary">{item.tag}</p>
-                    <h3 className="mb-3 text-xl font-black uppercase text-white">{item.title}</h3>
-                    <Button asChild size="sm" variant="outline" className="w-full border-2 border-white/20 bg-white/10 text-white backdrop-blur hover:bg-white hover:text-foreground">
-                      <Link href={item.href}>View Range</Link>
-                    </Button>
+                <TiltCard className="group relative overflow-hidden rounded-lg border-4 border-foreground bg-foreground shadow-[6px_6px_0px_0px_rgba(0,0,0,0.4)] transition-transform hover:-translate-y-1">
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <img src={item.img} alt={item.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                    <div className="absolute bottom-5 left-5 right-5">
+                      <p className="mb-1 font-mono text-[10px] font-bold uppercase tracking-wider text-primary">{item.tag}</p>
+                      <h3 className="mb-3 text-xl font-black uppercase text-white">{item.title}</h3>
+                      <Button asChild size="sm" variant="outline" className="w-full border-2 border-white/20 bg-white/10 text-white backdrop-blur hover:bg-white hover:text-foreground">
+                        <Link href={item.href}>View Range</Link>
+                      </Button>
+                    </div>
                   </div>
-                </div>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
@@ -745,7 +763,7 @@ export default function Home() {
 
       {/* 5. WORKSHOP & UTILITY */}
       <section className="relative overflow-hidden border-y-8 border-foreground h-[600px] lg:h-[700px] flex items-center justify-center">
-        <img src={cargoBikesImg} alt="Kampala bikes ready for work" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={cargoBikesImg} alt="Kampala bikes ready for work" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30" />
         
         <div className="relative z-10 mx-auto max-w-4xl text-center px-6">
@@ -792,10 +810,10 @@ export default function Home() {
             ].map((review, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                initial={{ opacity: 0, y: 40, x: i === 0 ? -20 : i === 2 ? 20 : 0 }}
+                whileInView={{ opacity: 1, y: 0, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: i * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="p-6 bg-card border-4 border-foreground rounded-lg shadow-[5px_5px_0px_0px_#000] flex flex-col justify-between"
               >
                 <p className="text-sm font-medium text-foreground italic mb-6 leading-relaxed">\"{review.quote}\"</p>
@@ -813,8 +831,11 @@ export default function Home() {
       <FAQSection />
 
       {/* 6. CTA SECTION */}
-      <section className="overflow-hidden bg-background px-5 py-16 md:px-12 md:py-24 lg:py-28" data-testid="section-cta">
-        <div className="mx-auto grid max-w-screen-xl grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+      <section className="relative overflow-hidden bg-background px-5 py-16 md:px-12 md:py-24 lg:py-28" data-testid="section-cta">
+        {/* Floating gradient orbs */}
+        <div className="absolute top-1/4 -left-32 h-64 w-64 rounded-full bg-primary/10 blur-3xl animate-pulse pointer-events-none" />
+        <div className="absolute bottom-1/4 -right-32 h-80 w-80 rounded-full bg-primary/5 blur-3xl animate-pulse pointer-events-none" />
+        <div className="mx-auto grid max-w-screen-xl grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end relative z-10">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="max-w-4xl">
             <p className="mb-4 font-mono text-xs font-bold uppercase tracking-normal text-primary">Ready to choose?</p>
             <h2 className="mb-6 text-[clamp(2.6rem,8vw,6.8rem)] font-black uppercase leading-[0.92] tracking-normal text-foreground">

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
@@ -8,17 +8,23 @@ import { GrainOverlay } from "@/components/ui/grain-overlay";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import Home from "@/pages/Home";
-import Bikes from "@/pages/Bikes";
-import Parts from "@/pages/Parts";
-import Rentals from "@/pages/Rentals";
-import Repairs from "@/pages/Repairs";
-import Showroom from "@/pages/Showroom";
-import Privacy from "@/pages/Privacy";
-import NotFound from "@/pages/not-found";
 import { RouteSeo } from "@/components/seo/RouteSeo";
 import { LocalBusinessSchema } from "@/components/seo/LocalBusinessSchema";
 import { GoogleAnalytics } from "@/components/seo/GoogleAnalytics";
+import { CustomCursor } from "@/components/ui/custom-cursor";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
+import { LoadingScreen } from "@/components/ui/loading-screen";
+
+const Home = lazy(() => import("@/pages/Home"));
+const Bikes = lazy(() => import("@/pages/Bikes"));
+const Parts = lazy(() => import("@/pages/Parts"));
+const Rentals = lazy(() => import("@/pages/Rentals"));
+const Repairs = lazy(() => import("@/pages/Repairs"));
+const Showroom = lazy(() => import("@/pages/Showroom"));
+const Privacy = lazy(() => import("@/pages/Privacy"));
+const NotFound = lazy(() => import("@/pages/not-found"));
+
 
 const queryClient = new QueryClient();
 
@@ -86,21 +92,23 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={location}
-        initial={{ opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -14 }}
-        transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       >
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/bikes" component={Bikes} />
-          <Route path="/parts" component={Parts} />
-          <Route path="/rentals" component={Rentals} />
-          <Route path="/repairs" component={Repairs} />
-          <Route path="/showroom" component={Showroom} />
-          <Route path="/privacy" component={Privacy} />
-          <Route component={NotFound} />
-        </Switch>
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-background"><div className="h-10 w-10 rounded-full border-4 border-primary/30 border-t-primary animate-spin" /></div>}>
+          <Switch>
+            <Route path="/" component={Home} />
+            <Route path="/bikes" component={Bikes} />
+            <Route path="/parts" component={Parts} />
+            <Route path="/rentals" component={Rentals} />
+            <Route path="/repairs" component={Repairs} />
+            <Route path="/showroom" component={Showroom} />
+            <Route path="/privacy" component={Privacy} />
+            <Route component={NotFound} />
+          </Switch>
+        </Suspense>
       </motion.div>
     </AnimatePresence>
   );
@@ -109,14 +117,20 @@ function AnimatedRoutes() {
 function AppLayout() {
   return (
     <div className="flex min-h-screen w-full flex-col">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[999] focus:rounded focus:bg-primary focus:px-4 focus:py-2 focus:font-bold focus:text-foreground">
+        Skip to main content
+      </a>
       <LocalBusinessSchema />
       <RouteSeo />
       <GoogleAnalytics />
       <GrainOverlay />
+      <CustomCursor />
       <WhatsAppButton />
+      <ScrollToTop />
       <ScrollRestoration />
+      <ScrollProgress />
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <AnimatedRoutes />
       </main>
       <Footer />
@@ -127,6 +141,7 @@ function AppLayout() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <LoadingScreen />
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <AppLayout />

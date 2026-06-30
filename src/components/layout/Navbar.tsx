@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ssottaWordmark from "@/assets/brand/ssotta-wordmark.png";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -92,8 +93,9 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center">
-          <div className="flex items-center gap-2 mr-6 text-xs font-mono font-black uppercase">
+        <div className="hidden md:flex items-center gap-4">
+          <ThemeToggle />
+          <div className="flex items-center gap-2 mr-2 text-xs font-mono font-black uppercase">
             <span className="relative flex h-2 w-2">
               {isOpen && (
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -164,6 +166,10 @@ export default function Navbar() {
                 <span className="font-mono text-xs font-bold uppercase text-background/60">
                   {isOpen ? "Shop is Open Now" : "Shop is Closed Now"}
                 </span>
+              </div>
+              <div className="flex items-center justify-between py-2 border-t border-background/10">
+                <span className="font-mono text-xs font-bold uppercase text-background/60">Theme</span>
+                <ThemeToggle />
               </div>
               <a
                 href="tel:+256757432917"
