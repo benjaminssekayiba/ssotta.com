@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Bike, CalendarCheck, PackageCheck, Phone, ShieldCheck, Store, Wrench, ArrowRight, PlayCircle, Volume2 } from "lucide-react";
 import ssottaWordmark from "@/assets/brand/ssotta-wordmark.png";
 import { TiltCard } from "@/components/ui/tilt-card";
+import { AnimatedText } from "@/components/ui/animated-text";
 
 /* Authentic Images from Chat */
 const kidOnBikeImg = "/hd-images/img-1.png";
@@ -798,7 +799,7 @@ export default function Home() {
                 location: "Bwayise"
               },
               {
-                quote: "Finding the right kids bicycle can be tough, but Brenda helped us pick the perfect 18-inch bike. My daughter rides it every day around Kawaala. Highly recommended!",
+                quote: "Finding the right kids bicycle can be tough, but Brenda helped us pick the perfect 18-inch bike. My daughter rides it every day with her friends. Highly recommended!",
                 author: "Nalongo S., Parent",
                 location: "Kawaala"
               },
@@ -816,7 +817,9 @@ export default function Home() {
                 transition={{ delay: i * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="p-6 bg-card border-4 border-foreground rounded-lg shadow-[5px_5px_0px_0px_#000] flex flex-col justify-between"
               >
-                <p className="text-sm font-medium text-foreground italic mb-6 leading-relaxed">\"{review.quote}\"</p>
+                <p className="text-sm font-medium text-foreground italic mb-6 leading-relaxed">
+                  <AnimatedText text={`"${review.quote}"`} />
+                </p>
                 <div>
                   <h4 className="font-sans text-base font-black text-foreground">{review.author}</h4>
                   <span className="font-mono text-xs text-primary font-bold uppercase">{review.location}</span>
