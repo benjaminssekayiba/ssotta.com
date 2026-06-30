@@ -300,3 +300,58 @@
     @apply min-h-12 rounded-md border-2 border-background/25 bg-background/5 font-sans text-background placeholder:text-background/35 focus:border-primary;
   }
 }
+
+/* Dark Mode Contrast Block Fixes */
+.dark section.bg-foreground,
+.dark footer.bg-foreground,
+.dark div.bg-foreground,
+.dark main.bg-foreground {
+  background-color: #0f0f0f !important;
+  color: #e5e5e5 !important;
+  border-color: #262626 !important;
+}
+
+.dark section.bg-foreground h1,
+.dark section.bg-foreground h2,
+.dark section.bg-foreground h3,
+.dark section.bg-foreground h4,
+.dark section.bg-foreground h5,
+.dark footer.bg-foreground h1,
+.dark footer.bg-foreground h2,
+.dark footer.bg-foreground h3,
+.dark footer.bg-foreground h4,
+.dark footer.bg-foreground h5,
+.dark div.bg-foreground h1,
+.dark div.bg-foreground h2,
+.dark div.bg-foreground h3,
+.dark div.bg-foreground h4,
+.dark div.bg-foreground h5 {
+  color: #ffffff !important;
+}
+
+.dark section.bg-foreground .text-background,
+.dark footer.bg-foreground .text-background,
+.dark div.bg-foreground .text-background {
+  color: #e5e5e5 !important;
+}
+
+.dark section.bg-foreground .text-background\/60,
+.dark section.bg-foreground .text-background\/70,
+.dark footer.bg-foreground .text-background\/60,
+.dark footer.bg-foreground .text-background\/70,
+.dark div.bg-foreground .text-background\/60,
+.dark div.bg-foreground .text-background\/70 {
+  color: rgba(229, 229, 229, 0.65) !important;
+}
+
+.dark section.bg-foreground .text-muted-foreground,
+.dark footer.bg-foreground .text-muted-foreground,
+.dark div.bg-foreground .text-muted-foreground {
+  color: #a3a3a3 !important;
+}
+
+.dark section.bg-foreground .border-background\/20,
+.dark footer.bg-foreground .border-background\/20,
+.dark div.bg-foreground .border-background\/20 {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
