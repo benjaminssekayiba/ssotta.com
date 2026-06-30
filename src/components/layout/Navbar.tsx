@@ -110,7 +110,7 @@ export default function Navbar() {
             asChild
             className={`uppercase font-bold tracking-normal rounded-md border transition-all active:scale-95 ${
               isTransparent
-                ? "border-white/40 bg-white text-foreground hover:bg-primary hover:text-foreground"
+                ? "border-white/40 bg-white text-neutral-950 hover:bg-primary hover:text-neutral-950"
                 : "border-foreground/10 bg-foreground text-background hover:bg-primary hover:text-foreground"
             }`}
             size="lg"

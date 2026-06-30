@@ -423,7 +423,7 @@ function PromoVideoPanel() {
               <button
                 type="button"
                 onClick={enableSound}
-                className="absolute bottom-4 left-4 z-20 flex items-center gap-2 rounded-md border-2 border-white/70 bg-white px-4 py-2 font-mono text-xs font-black uppercase text-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,0.55)] transition-transform hover:-translate-y-0.5"
+                className="absolute bottom-4 left-4 z-20 flex items-center gap-2 rounded-md border-2 border-white/70 bg-card px-4 py-2 font-mono text-xs font-black uppercase text-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,0.55)] transition-transform hover:-translate-y-0.5"
               >
                 <Volume2 className="h-4 w-4 text-primary" />
                 Sound On
@@ -510,7 +510,7 @@ export default function Home() {
             <Button asChild size="lg" className="h-14 px-10 text-base font-black uppercase border-0 shadow-[5px_5px_0px_0px_#000] hover:shadow-[2px_2px_0px_0px_#000] hover:translate-x-1 hover:translate-y-1 transition-all rounded-md">
               <Link href="/bikes">View Bikes</Link>
             </Button>
-            <Button asChild size="lg" className="h-14 px-10 text-base font-black uppercase bg-transparent border-2 border-white text-white hover:bg-white hover:text-foreground shadow-[5px_5px_0px_0px_rgba(255,255,255,0.25)] hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.25)] hover:translate-x-1 hover:translate-y-1 transition-all rounded-md">
+            <Button asChild size="lg" className="h-14 px-10 text-base font-black uppercase bg-transparent border-2 border-white text-white hover:bg-white hover:text-neutral-950 shadow-[5px_5px_0px_0px_rgba(255,255,255,0.25)] hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.25)] hover:translate-x-1 hover:translate-y-1 transition-all rounded-md">
               <a href="tel:+256757432917"><Phone size={16} className="mr-2" />Call the Shop</a>
             </Button>
           </motion.div>
@@ -545,7 +545,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="group relative flex h-full flex-col overflow-hidden rounded-xl border-4 border-foreground bg-white shadow-[6px_6px_0px_0px_#000] transition-transform hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_#000]"
+                className="group relative flex h-full flex-col overflow-hidden rounded-xl border-4 border-foreground bg-card shadow-[6px_6px_0px_0px_#000] transition-transform hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_#000]"
               >
                 <div className="relative h-48 overflow-hidden border-b-4 border-foreground sm:h-56 lg:h-52">
                   <img src={section.img} alt={`${section.eyebrow} at Ssotta`} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
@@ -750,7 +750,7 @@ export default function Home() {
                     <div className="absolute bottom-5 left-5 right-5">
                       <p className="mb-1 font-mono text-[10px] font-bold uppercase tracking-wider text-primary">{item.tag}</p>
                       <h3 className="mb-3 text-xl font-black uppercase text-white">{item.title}</h3>
-                      <Button asChild size="sm" variant="outline" className="w-full border-2 border-white/20 bg-white/10 text-white backdrop-blur hover:bg-white hover:text-foreground">
+                      <Button asChild size="sm" variant="outline" className="w-full border-2 border-white/20 bg-white/10 text-white backdrop-blur hover:bg-white hover:text-neutral-950">
                         <Link href={item.href}>View Range</Link>
                       </Button>
                     </div>

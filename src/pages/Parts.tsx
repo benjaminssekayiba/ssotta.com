@@ -360,7 +360,7 @@ export default function Parts() {
                       <span className="flex h-11 w-11 items-center justify-center rounded-md bg-primary text-foreground shadow-md">
                         <Icon className="h-5 w-5" />
                       </span>
-                      <span className="rounded-full bg-white/90 px-3 py-1 font-mono text-[10px] font-bold uppercase text-foreground">
+                      <span className="rounded-full bg-white/90 px-3 py-1 font-mono text-[10px] font-bold uppercase text-neutral-950">
                         {cat.stock}
                       </span>
                     </div>
