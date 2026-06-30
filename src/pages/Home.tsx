@@ -525,6 +525,62 @@ export default function Home() {
         </div>
       </div>
 
+      {/* 3. OUR SERVICES */}
+      <section className="bg-background px-5 py-16 md:px-12 md:py-24" data-testid="section-services">
+        <div className="mx-auto max-w-screen-xl">
+          <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div className="max-w-2xl">
+              <p className="mb-2 font-mono text-xs font-bold uppercase text-primary">What We Do</p>
+              <h2 className="text-4xl font-black uppercase leading-none tracking-normal text-foreground md:text-6xl">
+                Start with the<br />service you need.
+              </h2>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {homeSections.map((section, i) => (
+              <motion.div
+                key={section.eyebrow}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+                className="group relative flex h-full flex-col overflow-hidden rounded-xl border-4 border-foreground bg-white shadow-[6px_6px_0px_0px_#000] transition-transform hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_#000]"
+              >
+                <div className="relative h-48 overflow-hidden border-b-4 border-foreground sm:h-56 lg:h-52">
+                  <img src={section.img} alt={`${section.eyebrow} at Ssotta`} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  
+                  {/* Context Badge */}
+                  <div className="absolute top-3 left-3 z-10 rounded border border-white/20 bg-black/75 px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-wider text-white">
+                    {section.contextLabel}
+                  </div>
+
+                  <div className="absolute bottom-4 left-4 flex items-center gap-3">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-md bg-primary text-foreground shadow-[3px_3px_0px_0px_#000]">
+                      <section.icon className="h-6 w-6" />
+                    </span>
+                    <div>
+                      <p className="font-mono text-[10px] font-bold uppercase text-primary">{section.stat}</p>
+                      <h3 className="font-black uppercase text-white">{section.eyebrow}</h3>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <h4 className="mb-2 text-lg font-black uppercase text-foreground">{section.title}</h4>
+                  <p className="mb-6 flex-1 font-sans text-sm font-medium leading-relaxed text-muted-foreground">{section.desc}</p>
+                  <Button asChild className="w-full rounded-md border-2 border-foreground bg-background text-foreground hover:bg-primary shadow-[3px_3px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 transition-all">
+                    <Link href={section.href}>
+                      {section.cta} <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 2. ABOUT & STATS SECTION (MOVED UP) */}
       <section className="relative overflow-hidden border-b-4 border-foreground bg-foreground px-5 py-16 text-background md:px-12 md:py-24" data-testid="section-about">
         <div className="absolute inset-0 z-0">
@@ -666,62 +722,6 @@ export default function Home() {
                 </Button>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. OUR SERVICES */}
-      <section className="bg-background px-5 py-16 md:px-12 md:py-24" data-testid="section-services">
-        <div className="mx-auto max-w-screen-xl">
-          <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div className="max-w-2xl">
-              <p className="mb-2 font-mono text-xs font-bold uppercase text-primary">What We Do</p>
-              <h2 className="text-4xl font-black uppercase leading-none tracking-normal text-foreground md:text-6xl">
-                Start with the<br />service you need.
-              </h2>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {homeSections.map((section, i) => (
-              <motion.div
-                key={section.eyebrow}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="group relative flex h-full flex-col overflow-hidden rounded-xl border-4 border-foreground bg-white shadow-[6px_6px_0px_0px_#000] transition-transform hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_#000]"
-              >
-                <div className="relative h-48 overflow-hidden border-b-4 border-foreground sm:h-56 lg:h-52">
-                  <img src={section.img} alt={`${section.eyebrow} at Ssotta`} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  
-                  {/* Context Badge */}
-                  <div className="absolute top-3 left-3 z-10 rounded border border-white/20 bg-black/75 px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-wider text-white">
-                    {section.contextLabel}
-                  </div>
-
-                  <div className="absolute bottom-4 left-4 flex items-center gap-3">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-md bg-primary text-foreground shadow-[3px_3px_0px_0px_#000]">
-                      <section.icon className="h-6 w-6" />
-                    </span>
-                    <div>
-                      <p className="font-mono text-[10px] font-bold uppercase text-primary">{section.stat}</p>
-                      <h3 className="font-black uppercase text-white">{section.eyebrow}</h3>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <h4 className="mb-2 text-lg font-black uppercase text-foreground">{section.title}</h4>
-                  <p className="mb-6 flex-1 font-sans text-sm font-medium leading-relaxed text-muted-foreground">{section.desc}</p>
-                  <Button asChild className="w-full rounded-md border-2 border-foreground bg-background text-foreground hover:bg-primary shadow-[3px_3px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 transition-all">
-                    <Link href={section.href}>
-                      {section.cta} <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
